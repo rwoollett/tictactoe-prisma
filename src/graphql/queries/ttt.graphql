@@ -1,0 +1,61 @@
+
+mutation CreateNewGame($userId: Int!) {
+  createGame(userId: $userId) {
+    id
+    userId
+    board
+    createdAt
+  }
+}
+
+mutation StartGame($gameId: Int!) {
+  startGame(gameId: $gameId) {
+    id
+    userId
+    board
+    createdAt
+  }
+}
+
+mutation BoardMove($gameId: Int!, $moveCell: Int!, $player: Int!, $isOpponentStart: Boolean!) {
+  boardMove(gameId: $gameId, moveCell: $moveCell, player: $player, isOpponentStart: $isOpponentStart) {
+    id
+    allocated
+    gameId
+    player
+    moveCell
+    isOpponentStart
+  }
+}
+
+query GetPlayerMove($nodeId: String!) {
+  getPlayerMove(nodeId: $nodeId) {
+    allocated
+    gameId
+    id
+    moveCell
+    player
+    game {
+      id,
+      board,
+      userId
+      createdAt
+    }
+  }
+}
+
+mutation ServerUpdateBoard($gameId: Int!, $board: String!, $result: String!) {
+  serverUpdateBoard(gameId: $gameId, board: $board, result: $result) {
+    id
+    board
+    result
+  }
+}
+
+subscription GameUpdateByGameId($gameId: Int!) {
+  game_Update(gameId: $gameId) {
+    board
+    gameId
+    result
+  }
+}

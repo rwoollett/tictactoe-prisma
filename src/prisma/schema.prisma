@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Game {
+  id          Int          @id @default(autoincrement())
+  userId      Int          @default(1)
+  board       String       @default("0,0,0,0,0,0,0,0,0")
+  createdAt   DateTime     @default(now())
+  playerMoves PlayerMove[]
+}
+
+model PlayerMove {
+  id              Int     @id @default(autoincrement())
+  gameId          Int
+  player          Int     @default(1)
+  moveCell        Int
+  isOpponentStart Boolean @default(false)
+  allocated       Boolean @default(false)
+  game            Game    @relation(fields: [gameId], references: [id], onDelete: Cascade)
+}
