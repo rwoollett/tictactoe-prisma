@@ -11,9 +11,7 @@ scratch.txt
 api.http
 gol.env
 compose.env
-IntrospectionQuery.*
-!IntrospectionQuery.graphql
-TTTService.hpp
+set_env.sh
 
 # testing
 tmp.html
