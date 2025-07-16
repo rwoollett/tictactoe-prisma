@@ -4,8 +4,6 @@
   "description": "Prisma for the stack SQL database",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev --transpile-only src/api/server.ts",
-    "start": "ts-node --transpile-only src/api/server.ts",
     "generate": "prisma generate",
     "test": "npm run generate && jest",
     "seeddocker": "ts-node ./src/prisma/seed_docker.ts"
