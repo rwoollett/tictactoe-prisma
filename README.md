@@ -1,36 +1,10 @@
-<h1 align="center">Tic Tac Toe (TTT) Service with GraphQL</h1>
+<h1 align="center">Tic Tac Toe (TTT) Service Prisma</h1>
 
 <br />
-The GraphQL service uses Nexus schema and Prisma for the SQL database.
-
-The GOL service uses a Bulletin type of Database to holds tasks that are allocate to clients on 
-the network to complete and send back results.
-The mutations and updates to task with task result mutations is where the TicTacToe board is made.
-It will be the client applications to perform the rules on the task they acquire.
-The client application is responsible for obtaining a CSToken and read notes under a critical section lock.
-
 The service is made to be used in a Web application to display the board play for TicTacToe.
 
 <br/>
 
-# To use with a Docker Compose system
-
-Make docker image in project root folder with: 
-```
-docker build -t ttt-dev:v1.0 -f Dockerfile.dev .
-```
-
-The docker compose can run the docker image ttt-dev:v1.0.
-Run docker compose with:
-```
-docker-compose up
-```
-
-The compose runtime will also need to generate:
-- Redis cache (used for pubsub of events for apollo subscriptions as consumer of published events)
-- PostGres database
-- Network for the images to be running on
-- The CSToken qraphql service (optional). The GOL board can be also be created with GOL mutations.
 
 ## Postgres database instance
 When running doocker-compose, the Postgres database can be pushed from the local Postgres database.
@@ -63,24 +37,6 @@ datasource db {
   });
 ```
 
-# Generate code for CPP
-Applications written for accessing the GOL apollo query service in C++ can use CaffQL
-
-## Use CaffQL to generate CPP code 
-Depends on the application CaffQL to be built in a separate folder.
-The git repo can be cloned from (https://github.com/caffeinetv/CaffQL)
-
-Then within the git repo folder (../CaffQL):
-```
-cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local -G "Unix Makefiles" . -B ./build-release
-cmake --build build-release --target all
-```
-
-## CaffQL command line: 
-Using the caffql in the cstoken project folder:
-```
-../CaffQL/build-release/caffql --schema IntrospectionQuery.json --output TTTService.hpp --namespace tttql
-```
 
 <br />
 
@@ -89,23 +45,6 @@ Using the caffql in the cstoken project folder:
 In the project directory, you can run:
 <br />
 
-
-## ⚡️ dev
-
-```
-npm run dev
-```
-
-The application depends on a local Postgres database and an instance of Reddis.
-If not present the dev command will error.
-
-Runs the app in the development mode.\
-Open [http://localhost:3008/api/graphql](http://localhost:3008/graphql) to view playground.
-
-## Setup Redis cache for dev if not using docker-compose
-```
-docker run --rm --name test-redis -p 6379:6379 redis:6.2-alpine redis-server --loglevel warning --requirepass <your password here>
-```
 
 ## Setup a Postgres for dev if not using docker-compose
 Use a docker container to ease setup of postgres.
@@ -152,17 +91,6 @@ Launches the test runner.
 
 <br />
 
-## 🦾 Start
-
-Will do the same as npm run dev. Uses ts-node instead of ts-node-dev. 
-```
-npm run start
-```
-
-Starts the app for production uses.\
-
-<br />
-
 # 🧬 Project structure
 
 This is the structure of the files in the project:
@@ -173,19 +101,10 @@ This is the structure of the files in the project:
     │   ├── api
     │   │   ├── tests           # Tests for GraphQL resolvers
     │   │   │   ├── __helpers.ts
-    │   │   │   ├── blogs.test.ts
-    │   │   │   └── posts.test.ts   
+    │   │   │   └── ttt.test.ts   
     │   │   ├── context.ts      # Nexus schema for local Apollo GraphQL
     │   │   └── server.ts       # Entry point to server
-    │   ├── events              # Folder for message events
     │   ├── generated           # Apollo code generation of typedef and hooks from *.graphql files.
-    │   ├── graphql             # GraphQL typedefs and reducers
-    │   │   ├── resolvers       # Local schema resolvers for qraphql
-    │   │   │   └── ttt.ts      # Service resolvers for apollo ql   
-    │   │   ├── types           # store's actions
-    │   │   │   ├── ttt.ts      # Objects for Apollo QL. Uses prisma database objects for client inforation
-    │   │   │   └── index.ts    # index for all typedefs (used in schema.ts)
-    │   │   └── schema.ts       # Apollo Server local schema for CSToken service tables (Postgres database)
     │   ├── lib                 # Apollo client/server and Prisma client
     │   │   └── prismaClient.ts # Prisma client
     │   ├── prisma
@@ -196,9 +115,7 @@ This is the structure of the files in the project:
     ├── .dockerignore
     ├── .eslintrc.js
     ├── .gitignore
-    ├── docker-compose.yml
-    ├── Dockerfile
-    ├── TTTService.graphql  # Introspection the TTT graphql service for JSON output
+    ├── kubedb
     ├── jest-config.js
     ├── package.json
     ├── README.md
