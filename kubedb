@@ -10,6 +10,6 @@ port=$2
 
 echo DB_PORT=$port > .env.port
 echo HOST_ADDR=$host >> .env.port
-npx dotenv -e .env.port -e .env.local -- npx prisma db push
-npx dotenv -e .env.port -e .env.local -- npx prisma db seed
+npx dotenv -e .env.db -e .env.port -e .env.local -- npx prisma db push
+npx dotenv -e .env.db -e .env.port -e .env.local -- npx prisma db seed
 
