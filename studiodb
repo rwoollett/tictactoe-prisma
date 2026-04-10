@@ -1,0 +1,18 @@
+#!/bin/bash
+# if [ -z "$1" ]; then
+#   echo "Usage: $0 <host> <port>"
+#   exit 1
+# fi
+
+tttdbport=$(docker ps | grep tttDB | awk -F'[ :>-]+' '{for(i=1;i<=NF;i++) if($i=="0.0.0.0") print $(i+1)}')
+if [ -z "$tttdbport" ]; then
+  echo "Usage: NetProc system should be up and running. TTT DB is found in NetProc infrastructure"
+  exit 1
+fi
+
+echo "Docker hosted TTT port: "  $tttdbport 
+echo DB_PORT=$tttdbport > .env.port
+echo HOST_ADDR=localhost >> .env.port
+npx dotenv -e .env.db -e .env.port -e .env.local -- npx jest
+npx dotenv -e .env.db -e .env.port -e .env.local -- npx prisma studio
+

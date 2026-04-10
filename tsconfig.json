@@ -3,6 +3,10 @@
     "jsx": "preserve",
     "target": "ES2018",
     "module": "Node16",
+    "types": [
+      "node",
+      "jest"
+    ],
     "lib": [
       "ESNext",
       "esnext.asynciterable",

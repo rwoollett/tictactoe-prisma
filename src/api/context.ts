@@ -1,11 +1,7 @@
 import { PrismaClient } from "../lib/prismaClient";
-import { RedisPubSub  } from 'graphql-redis-subscriptions';
+import jwt from 'jsonwebtoken';
 
 export interface Context {
   prisma: PrismaClient;
-  pubsub: RedisPubSub;
-}
-
-export interface TestingContext {
-  prisma: PrismaClient;
+  user: jwt.JwtPayload | null;
 }
