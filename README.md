@@ -104,20 +104,20 @@ This is the structure of the files in the project:
     │   │   │   └── ttt.test.ts   
     │   │   ├── context.ts      # Nexus schema
     │   │   └── server.ts       # Entry point to server
-    │   ├── generated           # Apollo code generation of typedef and hooks from *.graphql files.
-    │   ├── lib                 # Apollo client/server and Prisma client
+    │   ├── lib                 
     │   │   └── prismaClient.ts # Prisma client
-    │   ├── prisma
-    │   │   ├── migrations
-    │   │   ├── schema.prisma   # Prisma SQL schema
-    │   │   └── seed.ts         # Seed file for tests on dev SQL source
-    │   └── codegen.ts      
-    ├── .dockerignore
+    │   └── prisma
+    │       ├── migrations
+    │       ├── schema.prisma   # Prisma SQL schema
+    │       └── seed.ts         # Seed file for tests on dev SQL source
     ├── .eslintrc.js
     ├── .gitignore
-    ├── kubedb
     ├── jest-config.js
+    ├── kubedb
+    ├── package-lock.json
     ├── package.json
+    ├── prisma.config.ts
     ├── README.md
+    ├── studiodb
     └── tsconfig.json
 ```
