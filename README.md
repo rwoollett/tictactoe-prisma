@@ -99,10 +99,10 @@ This is the structure of the files in the project:
     │
     ├── src                     # source files
     │   ├── api
-    │   │   ├── tests           # Tests for GraphQL resolvers
+    │   │   ├── tests           # Tests 
     │   │   │   ├── __helpers.ts
     │   │   │   └── ttt.test.ts   
-    │   │   ├── context.ts      # Nexus schema for local Apollo GraphQL
+    │   │   ├── context.ts      # Nexus schema
     │   │   └── server.ts       # Entry point to server
     │   ├── generated           # Apollo code generation of typedef and hooks from *.graphql files.
     │   ├── lib                 # Apollo client/server and Prisma client
@@ -111,7 +111,7 @@ This is the structure of the files in the project:
     │   │   ├── migrations
     │   │   ├── schema.prisma   # Prisma SQL schema
     │   │   └── seed.ts         # Seed file for tests on dev SQL source
-    │   └── codegen.ts      # Grapgh ql queries hooks and types generator codegen runner
+    │   └── codegen.ts      
     ├── .dockerignore
     ├── .eslintrc.js
     ├── .gitignore
